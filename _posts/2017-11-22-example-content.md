@@ -1,12 +1,23 @@
 ---
 layout: post
-title: Example content
+title: Using GUI Application on Windows10 Subsystem for Linux 
 description: >
   This is a normal paragraph following a header.
   GitHub is a code hosting platform for version control and collaboration.
   It lets you and others work together on projects from anywhere.
-tags: [hydejack]
+tags: [windows10, linux]
 ---
+
+
+
+1. ssh service execute
+
+2. Install xming on windows10 
+
+3. export DISPLAY=:0
+
+4. execute GUI application 
+
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
