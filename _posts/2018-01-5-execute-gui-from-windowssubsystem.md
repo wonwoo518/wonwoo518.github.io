@@ -1,3 +1,4 @@
+
 ---
 layout: post
 title: Windows 10 서브시스템 Linux에서 GUI 프로그램 사용하기
@@ -7,12 +8,10 @@ description: >
   어떻게하면 Windows Subsystem Linux에서 GUI 프로그램을 사용할 수 있을까? 
   Windows SubSystem Linux에서 GUI 프로그램을 사용하기 위해선 크게 두가지 작업을 해야한다. 
   하나는 Windows 10에서 할 일이고 다른 하나는 Linux에서 할 일이다. 
-  
-
-
 tags: [ubuntu]
-author: author1
+author: author2
 ---
+
 
 ### Windows 10에서 할 일 
 Xming을 설치한다. Linux의 GUI 프로그램을 화면에 보여주는 역할을 한다.  
