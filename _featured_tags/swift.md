@@ -3,7 +3,7 @@ layout: list
 title: Swift
 slug: Swift
 menu: true
-order: 1
+order: 2
 description: >
   Swift 관련 포스팅
 accent_color: '#268bd2'

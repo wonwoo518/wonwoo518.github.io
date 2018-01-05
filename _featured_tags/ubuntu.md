@@ -3,7 +3,7 @@ layout: list
 title: Ubuntu
 slug: ubuntu
 menu: true
-order: 1
+order: 5
 description: >
   Ubuntu 관련 포스팅
 accent_color: '#268bd2'
