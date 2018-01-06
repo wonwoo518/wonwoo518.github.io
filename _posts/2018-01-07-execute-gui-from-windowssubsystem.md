@@ -1,9 +1,7 @@
+
 ---
-
 layout: post
-
-title: Windows 10 서브시스템 Linux (WSL)에서 GUI 프로그램 사용하기
-
+title: Windows10 서브시스템 Linux (WSL)에서 GUI 프로그램 사용하기
 description: >
   WSL을 사용하다 보면 콘솔에서 vi, vim등을 사용하는게 익숙하지 않아서 불편할 때가 많다. 
   이런 경우 GUI환경이 제공되는 텍스트 에디터를 쓰고 싶어진다. 이런 경우 어떻게 할까?  
@@ -12,6 +10,8 @@ description: >
 tags: [ubuntu]
 
 ---
+
+# Windows10 서브시스템 Linux (WSL)에서 GUI 프로그램 사용하기
 
 ## Windows 10에서의 작업
 Xming을 설치한다. Linux의 GUI 프로그램을 화면에 보여주는 역할을 한다.
