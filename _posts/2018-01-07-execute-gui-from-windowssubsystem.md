@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: Windows10 서브시스템 Linux (WSL)에서 GUI 프로그램 사용하기
