@@ -9,7 +9,7 @@ description: >
 tags: [ubuntu]
 ---
 
-## Windows 10에서 할 일
+Windows 10에서 할 일
 Xming을 설치한다. Linux의 GUI 프로그램을 화면에 보여주는 역할을 한다.
 설치 - https://sourceforge.net/projects/xming/
 
