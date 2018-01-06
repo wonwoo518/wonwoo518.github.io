@@ -9,23 +9,23 @@ description: >
 tags: [ubuntu]
 ---
 
-### Windows 10에서 할 일
+## Windows 10에서 할 일
 Xming을 설치한다. Linux의 GUI 프로그램을 화면에 보여주는 역할을 한다.
 설치 - https://sourceforge.net/projects/xming/
 
-### WSL에서 할 일
+## WSL에서 할 일
 ##### ssh 데몬 띄우기
 ~~~js
 #sudo apt-get install  openssh-server
 #sudo service ssh --full-restart
 ~~~
 
-##### display export 하기
+#### display export 하기
 ~~~js
 #export DISPLAY=:0
 ~~~
 
-##### GUI 프로그램 실행하기 > sublime text를 실행해보자
+#### GUI 프로그램 실행하기 > sublime text를 실행해보자
 
 
 ~~~js
