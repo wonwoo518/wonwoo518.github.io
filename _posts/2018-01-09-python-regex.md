@@ -7,7 +7,7 @@ tags: [python]
 
 ---
 
-개발을 하다보면 은근히 스크립트를 작성해야할 때가 생긴다. 
+개발을 하다보면 종종 스크립트를 작성해야할 때가 생긴다. 
 이런 경우 어김없이 정규식을 써야하는 상황에 처하게 된다. 
 이번 포스팅에선 필자가 최근 사용했던 python 정규식 패턴을 소개하고자 한다. 
 
@@ -31,6 +31,8 @@ for word in sys.argv:
 	commandString += word
 	commandString += " "
 
+
+# 다양한 option을 정규식으로 찾게 되면 len(sys.argv)과 독립적으로 코드를 잘 수 있게 된다.
 mat = re.search(r"\s(-option1)", commandString)
 	if mat != None :
 		if len(mat.groups()) == 1:
