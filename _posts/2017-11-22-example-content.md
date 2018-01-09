@@ -9,13 +9,7 @@ description: >
 tags: [hydejack]
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
 
-[Link to another page](another-page).
-
-There should be whitespace between paragraphs.
-
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
 
 ## Windows 10에서의 작업
 Xming을 설치한다. Linux의 GUI 프로그램을 화면에 보여주는 역할을 한다.
