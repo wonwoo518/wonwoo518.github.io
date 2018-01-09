@@ -1,16 +1,17 @@
 ---
 layout: post
-title: Windows10 서브시스템 Linux (WSL)에서 GUI 프로그램 사용하기
+title: "Windows10 서브시스템 Linux (WSL)에서 GUI 프로그램 사용하기"
 description: >
   Windows 10 SubSystem Linux에서 GUI 프로그램을 사용하기 위한 방법 기술 
+  WSL을 사용하다 보면 콘솔에서 vi, vim등을 사용하는게 익숙하지 않아서 불편할 때가 많다. 
+  이런 경우 GUI환경이 제공되는 텍스트 에디터를 쓰고 싶어진다. 이런 경우 어떻게 할까?  
+  WSL 에서 GUI 프로그램을 사용하기 위해선 크게 두가지 작업을 해야한다.
+  하나는 Windows 10에서의 작업, 다른 하나는 WSL의 작업이다. 
+
 tags: [ubuntu]
 ---
 
 
-WSL을 사용하다 보면 콘솔에서 vi, vim등을 사용하는게 익숙하지 않아서 불편할 때가 많다. 
-이런 경우 GUI환경이 제공되는 텍스트 에디터를 쓰고 싶어진다. 이런 경우 어떻게 할까?  
-WSL 에서 GUI 프로그램을 사용하기 위해선 크게 두가지 작업을 해야한다.
-하나는 Windows 10에서의 작업, 다른 하나는 WSL의 작업이다. 
 
 
 
