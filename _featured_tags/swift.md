@@ -1,7 +1,7 @@
 ---
 layout: list
 title: Swift
-slug: Swift
+slug: swift
 menu: true
 order: 2
 description: >

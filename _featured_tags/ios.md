@@ -1,7 +1,7 @@
 ---
 layout: list
 title: iOS
-slug: iOS
+slug: ios
 menu: true
 order: 1
 description: >
