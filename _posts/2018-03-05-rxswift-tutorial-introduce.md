@@ -24,7 +24,7 @@ ObservableType.subscribe(_:) 는 Sequence.makeIterator()과 동일하다
 ObservableType.subscribe(_:) 는 ObserverType 파라미터를 가지고 Observable이 방출하는 이벤트를 자동으로 수신한다. 
 
 
-### Rx.playground
+Playground 에서  Observable 생성 예
 ~~~
 import RxSwift
 func example(_ description:String, action:()->Swift.Void){
