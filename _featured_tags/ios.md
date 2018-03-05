@@ -5,7 +5,7 @@ slug: ios
 menu: true
 order: 1
 description: >
-  Ubuntu 관련 포스팅
+  iOS 관련 포스팅
 accent_color: '#268bd2'
 accent_image:
   background: '#202020'
