@@ -7,7 +7,7 @@ tags: [swift]
 
 ---
 
-https://github.com/ReactiveX/RxSwift/tree/master/Rx.playground 를  토대로 RxSwift에 대해서 알아보자. 
+https://github.com/ReactiveX/RxSwift/tree/master/Rx.playground 를 토대로 RxSwift에 대해서 알아보자. 
 
 
 ## Why use RxSwift?
