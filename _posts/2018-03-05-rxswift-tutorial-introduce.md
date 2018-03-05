@@ -7,8 +7,6 @@ tags: [swift]
 
 ---
 
-https://github.com/ReactiveX/RxSwift/tree/master/Rx.playground 를 토대로 RxSwift에 대해서 알아보자. 
-
 
 ## Why use RxSwift?
 @IBAction 이벤트 핸들링, keyboard 위치 변화, URL 세션 응답, KVO 같은 다양한 응답/요청 시스템은 코드를 복잡하게 만든다. 
