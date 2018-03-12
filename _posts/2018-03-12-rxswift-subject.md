@@ -8,7 +8,7 @@ tags: [swift]
 Subject에 대해서 알아본다.
 
 ## Subject
-Observable, observer 두가지 기능을 하는 프록시 또는 브릿지이다. observer이기에 하나 이상의 Observable을 구독하거나 Observable이기에 아이템을 내보낼 수 있다. 각 subject의 구체적인 동작은 [RxSwift](http://reactivex.io/documentation/subject.html) 참고하자. 
+Observable, observer 두가지 기능을 하는 프록시 또는 브릿지이다. observer이기에 하나 이상의 Observable을 구독하거나 Observable이기에 아이템을 내보낼 수 있다. subject 종류에 따른 동작은 [RxSwift](http://reactivex.io/documentation/subject.html) 참고하자. 
  
 
 
