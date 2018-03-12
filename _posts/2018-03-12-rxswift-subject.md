@@ -47,7 +47,7 @@ Observable, observer 두가지 기능을 하는 프록시 또는 브릿지이다
     
     subject.subscribe{ print("observer2 Event:\($0)") }.disposed(by:disposeBag)
     subject.onNext("c")
-    subject.onNext("d”)
+    subject.onNext("d")
 
     //결과 
     observer1 Event:next(a)
@@ -63,7 +63,7 @@ Observable, observer 두가지 기능을 하는 프록시 또는 브릿지이다
 모든 옵저버에게 이벤트를 전달하며 옵저버가 생기기 이전 가장 마지막 이벤트가 옵저버에 전달된다. 
 ```swift
     let disposeBag = DisposeBag()
-    let subject = BehaviorSubject(value: “z")
+    let subject = BehaviorSubject(value: "z")
     
     subject.subscribe{ print("observer1 Event:\($0)") }.disposed(by:disposeBag)
     subject.onNext("a")
@@ -77,7 +77,7 @@ Observable, observer 두가지 기능을 하는 프록시 또는 브릿지이다
     subject.onNext("e")
     subject.onNext("f")
 
-     //결과 
+    //결과 
     observer1 Event:next(z)
     observer1 Event:next(a)
     observer1 Event:next(b)
