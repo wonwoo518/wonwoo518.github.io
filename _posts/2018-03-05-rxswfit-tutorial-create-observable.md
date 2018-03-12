@@ -1,12 +1,11 @@
 ---
 layout: post
 title: "[ RX_SWIFT ] RxSwift Tutorial 2"
-description: >
-  https://github.com/ReactiveX/RxSwift/tree/master/Rx.playground 를 토대로 RxSwift 익히기  
+description: ""
 tags: [swift]
 
 ---
-# [ RX_SWIFT ] RxSwift Tutorial 2
+Observable을 생성하는 여러 방법과 event subscription에 대한 예입니다. 
 
 ## Creating and Subscribing to Observables
 
@@ -23,7 +22,7 @@ tags: [swift]
 	* error
 	* do
 
-~~~java
+```swift
 //Observable의 create method
 //"Never"
 //어떤 이벤트도 방출하지 않음.
@@ -181,4 +180,4 @@ example("doOn") {
         .subscribe(onNext: { print($0) })
         .disposed(by: disposeBag)
 }
-~~~
+```
