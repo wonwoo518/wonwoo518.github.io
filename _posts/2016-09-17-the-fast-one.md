@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[ RX_SWIFT ] RxSwift Tutorial 3"
+title:  "[ RX_SWIFT ] 3. subject"
 description: ""
 tags: [swift]
 ---
