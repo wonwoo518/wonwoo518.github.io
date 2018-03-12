@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "[ RX_SWIFT ] RxSwift Tutorial 1"
-description: >
-  https://github.com/ReactiveX/RxSwift/tree/master/Rx.playground 를 토대로 RxSwift 익히기  
+description: ""
 tags: [swift]
 
 ---
-# [ RX_SWIFT ] RxSwift Tutorial 1
+
+ RxSwift의 기본컨셉에 대해서 알아본다. 
 
 ## Why use RxSwift?
 @IBAction 이벤트 핸들링, keyboard 위치 변화, URL 세션 응답, KVO 같은 다양한 응답/요청 시스템은 코드를 복잡하게 만든다. 
@@ -25,7 +25,7 @@ ObservableType.subscribe(_:) 는 ObserverType 파라미터를 가지고 Observab
 ~~~
 Playground 에서  Observable 생성 예
 ~~~
-~~~java
+```swift
 import RxSwift
 func example(_ description:String, action:()->Swift.Void){
     print("--\(description)--")
@@ -53,4 +53,4 @@ example("Observable with no subscribers"){
     }
 }
 
-~~~
+```
