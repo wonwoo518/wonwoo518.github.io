@@ -1,3 +1,12 @@
+---
+layout: post
+title: "[ RX_SWIFT ] 4. Operator"
+description: ""
+tags: [swift]
+
+---
+
+
 Operator는 여러 Observable를 하나의 Observable로 결합하는 역할을 한다. 
 
 ## startWith
