@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "[ RX_SWIFT ] 6. Filtering and Aggregating Operators"
+title: "[ RX_SWIFT ] 0. ObservableType vs ObserverType"
 description: ""
 tags: [swift]
 
 ---
+
+RxSwift의 가장 기본이 되는 ObservableType, ObserverType에 대해 코드 레벨에서 알아보자. 
 
 ## ObservableType 
 
