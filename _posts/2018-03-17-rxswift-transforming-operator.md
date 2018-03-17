@@ -56,7 +56,7 @@ p2.score.value = 100
 ```
 
 ## scan 
-함수형 언어의 join 과 같은 동작을 하며 각 요소를 더한 중간 값들을 리턴한다. [scan](http://reactivex.io/documentation/operators/scan.html)
+함수형 언어의 각 요소를 더한 중간 값들을 리턴한다. [scan](http://reactivex.io/documentation/operators/scan.html)
 
 ```swift
 let disposeBag = DisposeBag()
