@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[ RX_SWIFT ] 4. Transforming Operator"
+title: "[ RX_SWIFT ] 4. Combining Operator"
 description: ""
 tags: [swift]
 
