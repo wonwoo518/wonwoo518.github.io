@@ -10,7 +10,7 @@ tags: [swift]
  
 
 ## map
-transforming closure를 Observable에 의해 방출되는 각 요소에 적용해서 새로운 Observable을 반환한다. [map](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/map.png)
+transforming closure를 Observable에 의해 방출되는 각 요소에 적용해서 새로운 Observable을 반환한다. [map](http://reactivex.io/documentation/operators/map.html)
 ```swift
 let disposeBag = DisposeBag()
 Observable.of(1, 2, 3)
@@ -25,7 +25,7 @@ Observable.of(1, 2, 3)
 
 
 ## flatmap
-Observable에 의해 방출된 요소를 변환하여 원래 Observable의 sequence를 구성합니다.  [flatmap](https://raw.githubusercontent.com/kzaher/rxswiftcontent/master/MarbleDiagrams/png/flatmap.png)
+Observable에 의해 방출된 요소를 변환하여 원래 Observable의 sequence를 구성합니다.  [flatmap](http://reactivex.io/documentation/operators/flatmap.html)
 ```swift
 let disposeBag = DisposeBag()
     
@@ -56,7 +56,7 @@ p2.score.value = 100
 ```
 
 ## scan 
-함수형 언어의 join 과 같은 동작을 하며 각 요소를 더한 중간 값들을 리턴한다. 
+함수형 언어의 join 과 같은 동작을 하며 각 요소를 더한 중간 값들을 리턴한다. [scan](http://reactivex.io/documentation/operators/scan.html)
 
 ```swift
 let disposeBag = DisposeBag()
