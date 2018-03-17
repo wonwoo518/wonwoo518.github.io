@@ -10,9 +10,9 @@ RxSwift의 가장 기본이 되는 ObservableType, ObserverType에 대해 코드
 
 ## ObservableType 
 
-ObservableType은 Obsevable의 super class이다 
-ObservableType은 subscribe 메소드를 갖는다. 
-subscribe 메소드는 ObserverType을 인자로 리턴값은 ‘observer’의 subscription이며 이는 disposable하다. 
+- ObservableType은 Obsevable의 super class이다 
+- ObservableType은 subscribe 메소드를 갖는다. 
+- subscribe 메소드는 ObserverType을 인자로 리턴값은 ‘observer’의 subscription이며 이는 disposable하다. 
 
 
 ```swift
@@ -58,9 +58,9 @@ public class Observable<Element> : ObservableType {
 
 ## Observer
 
-RxSwift의 모든 observer는 “ObserverType”을 상속받는다. 
-observer의 subclass에는 AnyObserver, AmbObserver, SinkForward, Binder 등이 있다. 
-on 메소드로 observer에 sequence event를 전달한다. 
+- RxSwift의 모든 observer는 “ObserverType”을 상속받는다. 
+- observer의 subclass에는 AnyObserver, AmbObserver, SinkForward, Binder 등이 있다. 
+- on 메소드로 observer에 sequence event를 전달한다. 
 
 
 ```swift
