@@ -286,6 +286,10 @@ Observable.range(start: 1, count: 10)
     .toArray()
     .subscribe { print($0) }
     .disposed(by: disposeBag)
+
+//Output
+next([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+completed
 ```
 
 ## reduce
@@ -297,6 +301,9 @@ Observable.of(10, 100, 1000)
     .reduce(1, accumulator: +)
     .subscribe(onNext: { print($0) })
     .disposed(by: disposeBag)
+
+//Output
+1111    
 ```
 
 
@@ -327,4 +334,11 @@ Observable.of(10, 100, 1000)
     subject1.onCompleted()
     
     subject2.onNext("🐭")
+
+//Output
+next(🍎)
+next(🍐)
+next(🍊)
+next(🐱)
+next(🐭)
 ```
