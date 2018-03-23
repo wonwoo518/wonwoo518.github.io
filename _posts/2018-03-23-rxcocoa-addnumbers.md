@@ -70,7 +70,7 @@ public struct ControlProperty<PropertyType> : ControlPropertyType {
 }
 ```
 
-RxCocoa.ControlProperty.E는 RxCocoa.ControlProperty&#60String&#62 인 경우에 String이 되는 것이다. 
+RxCocoa.ControlProperty.E는 RxCocoa.ControlProperty<String> 인 경우에 String이 되는 것이다. 
 따라서 01.E, 02.E, 03.E에서 E는 String이다. 
 
 이젠 Self.E 타입이 어떤 타입인지 생각해보자. 
