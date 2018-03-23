@@ -61,7 +61,7 @@ public static func combineLatest<O1, O2, O3>(_ source1: O1,
 
 01, 02, 03은 combineLatest의 인자인 number1.rx.text.orEmpty , number2.rx.text.orEmpty, number3.rx.text.orEmpty가 되는 것이다. 
 여기에 .E가 붙었다. 이를 확인하기  .rx.text.orEmpty가 어떤 타입인지 살펴볼 필요가 있다. 
-.rx.text.orEmpty는 RxCocoa.ControlProperty&#60String&#62 이다. 
+.rx.text.orEmpty는 RxCocoa.ControlProperty< String > 이다. 
 
 RxCocoa.ControlProperty의 확인 해보자. 
 ```swift
@@ -70,7 +70,7 @@ public struct ControlProperty<PropertyType> : ControlPropertyType {
 }
 ```
 
-RxCocoa.ControlProperty.E는 RxCocoa.ControlProperty<String> 인 경우에 String이 되는 것이다. 
+RxCocoa.ControlProperty.E는 RxCocoa.ControlProperty< String > 인 경우에 String이 되는 것이다. 
 따라서 01.E, 02.E, 03.E에서 E는 String이다. 
 
 이젠 Self.E 타입이 어떤 타입인지 생각해보자. 
