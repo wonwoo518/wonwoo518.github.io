@@ -10,7 +10,7 @@ RxCocoa의 샘플을 통해서 RxCocoa의 사용법을 익혀보도록 하자. R
 
 
 ## 실행화면 
-<img src="https://github.com/wonwoo518/wonwoo518.github.io/blob/master/images/addnumber.png" width="246" height="500" alt="">
+<img src="https://github.com/wonwoo518/wonwoo518.github.io/blob/master/images/addnumber.png?raw=true" width="246" height="500" alt="">
 
 
 ## 소스코드 
