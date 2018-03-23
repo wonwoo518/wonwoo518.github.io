@@ -44,27 +44,33 @@ class NumbersViewController: ViewController {
 이 예제에선  number1.rx.text.orEmpty , number2.rx.text.orEmpty, number3.rx.text.orEmpty가 합산연산의 소스가 되는 Observables 이다. 
 초기 number1의 값이 1, number2값이 2, number3의 초기값이 3이면 combineLatest의 클로져 코드에 따라 6을 방출하는 Observable이 만들어진다. 
 number1값을 10으로 바꾸게 된다면 10 + 2 + 3 이 되어 15를 방출하게 된다. 이 상태에서 number2의 값을 10으로 바꾸면 10 + 10 + 3이 되어 33이 방출된다. 
-중요한 것은 각 observable의 가장 마지막 값을 사용되었다는 것이다. 
+중요한 것은 각 observable의 가장 마지막 값이 사용되었다는 것이다. 
 
 이젠 combineLatest의 prototype을 살펴보자. combineLatest의 인자가 3개의  ObservableType을 취하고 클로져는 01.E, 02.E, 03.E를 인자로 받고 Self.E를 리턴한다. 
 그렇다면 01.E, 02.E, 03.E는 무엇을 의미하는 것인지, Self.E는 무엇인지 살펴보도록 하자. 
 
 ```swift
-public static func combineLatest<O1, O2, O3>(_ source1: O1, _ source2: O2, _ source3: O3, resultSelector: @escaping (O1.E, O2.E, O3.E) throws -> Self.E) -> RxSwift.Observable<Self.E> where O1 : ObservableType, O2 : ObservableType, O3 : ObservableType
+public static func combineLatest<O1, O2, O3>(_ source1: O1,
+                                             _ source2: O2, 
+                                             _ source3: O3, 
+                                             resultSelector: @escaping (O1.E, O2.E, O3.E) throws -> Self.E) -> RxSwift.Observable<Self.E> where O1 : ObservableType, O2 : ObservableType, O3 : ObservableType{
+
+...
+}
 ```
 
 01, 02, 03은 combineLatest의 인자인 number1.rx.text.orEmpty , number2.rx.text.orEmpty, number3.rx.text.orEmpty가 되는 것이다. 
 여기에 .E가 붙었다. 이를 확인하기  .rx.text.orEmpty가 어떤 타입인지 살펴볼 필요가 있다. 
-RxCocoa.ControlProperty<String>
+.rx.text.orEmpty는 RxCocoa.ControlProperty&#60String&#62 이다. 
 
-RxCocoa.ControlProperty 타입이다. RxCocoa.ControlProperty를 살펴보자. 
+RxCocoa.ControlProperty의 확인 해보자. 
 ```swift
 public struct ControlProperty<PropertyType> : ControlPropertyType {
     public typealias E = PropertyType
 }
 ```
 
-RxCocoa.ControlProperty.E는 RxCocoa.ControlProperty<String> 인 경우에 String이 되는 것이다. 
+RxCocoa.ControlProperty.E는 RxCocoa.ControlProperty&#60String&#62 인 경우에 String이 되는 것이다. 
 따라서 01.E, 02.E, 03.E에서 E는 String이다. 
 
 이젠 Self.E 타입이 어떤 타입인지 생각해보자. 
