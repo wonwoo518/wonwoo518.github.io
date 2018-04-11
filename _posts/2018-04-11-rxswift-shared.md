@@ -21,6 +21,7 @@ ObservableType의 extension으로 하나의 subscription을 공유하는 Observa
 ### Prototype
 
 ```swift
+
 extension ObservableType {
 
     /**
@@ -59,7 +60,8 @@ extension ObservableType {
 
 예제는  UIViewController에 1개의 TextField가 있고 여기에 값을 변경할 때마다 Network로 request를 하는 것이다.
 
-​```swift
+```swift
+
         let ob:Observable<String> = usernameTextField.rx.text.orEmpty
             .map { text in 
                 //request username update
@@ -83,6 +85,7 @@ ob.subscribe를 통해 network에 요청이 발생 후 observer를 추가했다.
 위 코드에 따라 usernameTextField의 값이 바뀔때마다 network 요청이 발생할 것이고 "oberver 1", "observer 2"가 출력될 것을 예상할 것이다. 프로그램을 실행 후 usernameTextField에 "rxswift"를 입력하고 출력을 확인해보자. 
 
 ```
+
 Update username r
 observer 1 next(r)
 Update username r
@@ -111,6 +114,7 @@ Update username rxswift
 observer 1 next(rxswift)
 Update username rxswift
 observer 2 next(rxswift)
+
 ```
 
 위의 결과대로라면 TextField의 값을 바꿀때마다 2번의 network request가 호출된다. 이것은 의도한 결과가 아니다. 
@@ -122,6 +126,7 @@ observer 2 next(rxswift)
 shared Observable인 경우 
 
 ```swift
+
         let ob:Observable<String> = usernameTextField.rx.text.orEmpty
             .map { text in 
                 //request username update
@@ -146,6 +151,7 @@ shared Observable인 경우
 shared를 적용한 후 아래와 같은 실행결과를 얻을 수 있다. 원래 의도했던 동작이다. 
 
 ```
+
 Update username r
 observer 1 next(r)
 observer 2 next(r)
@@ -167,6 +173,7 @@ observer 2 next(rxswif)
 Update username rxswift
 observer 1 next(rxswift)
 observer 2 next(rxswift)
+
 ```
 
 
