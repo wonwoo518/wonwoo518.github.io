@@ -28,17 +28,17 @@ extension ObservableType {
          
          This operator is equivalent to:
          * `.whileConnected`
-```
+
          // Each connection will have it's own subject instance to store replay events.
          // Connections will be isolated from each another.
          source.multicast(makeSubject: { Replay.create(bufferSize: replay) }).refCount()
-         ```
+
          * `.forever`
-         ```
+
          // One subject will store replay events for all connections to source.
          // Connections won't be isolated from each another.
          source.multicast(Replay.create(bufferSize: replay)).refCount()
-         ```
+
          
          It uses optimized versions of the operators for most common operations.
     
