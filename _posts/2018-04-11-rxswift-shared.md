@@ -62,11 +62,11 @@ extension ObservableType {
 
 ```swift
 
-        let ob:Observable<String> = usernameTextField.rx.text.orEmpty
+        let ob:Observable<String> = searchTextField.rx.text.orEmpty
             .map { text in 
-                //request username update
+                //network request
                 // 
-                print("Update username \(text)")
+                print("Request search \(text)")
                 return text
             }
                 
@@ -86,40 +86,38 @@ ob.subscribe를 통해 network에 요청이 발생 후 observer를 추가했다.
 
 ```
 
-Update username r
+Request search r
 observer 1 next(r)
-Update username r
+Request search r
 observer 2 next(r)
-Update username rx
+Request search rx
 observer 1 next(rx)
-Update username rx
+Request search rx
 observer 2 next(rx)
-Update username rxs
+Request search rxs
 observer 1 next(rxs)
-Update username rxs
+Request search rxs
 observer 2 next(rxs)
-Update username rxsw
+Request search rxsw
 observer 1 next(rxsw)
-Update username rxsw
+Request search rxsw
 observer 2 next(rxsw)
-Update username rxswi
+Request search rxswi
 observer 1 next(rxswi)
-Update username rxswi
+Request search rxswi
 observer 2 next(rxswi)
-Update username rxswif
+Request search rxswif
 observer 1 next(rxswif)
-Update username rxswif
+Request search rxswif
 observer 2 next(rxswif)
-Update username rxswift
+Request search rxswift
 observer 1 next(rxswift)
-Update username rxswift
+Request search rxswift
 observer 2 next(rxswift)
 
 ```
 
-위의 결과대로라면 TextField의 값을 바꿀때마다 2번의 network request가 호출된다. 이것은 의도한 결과가 아니다. 
-
-그렇다면 shared 메소드를 사용해보자. 
+위의 결과대로라면 TextField의 값을 바꿀때마다 2번의 network request가 호출된다. 이것은 의도한 결과가 아니다.  shared를 통해 network request를 1번만 호출하도록 바꿔보자. 
 
 
 
@@ -127,11 +125,11 @@ shared Observable인 경우
 
 ```swift
 
-        let ob:Observable<String> = usernameTextField.rx.text.orEmpty
+        let ob:Observable<String> = searchTextField.rx.text.orEmpty
             .map { text in 
-                //request username update
+                //network request
                 // ...
-                print("Update username \(text)")
+                print("Request search \(text)")
                 return text
             }.shared() 
                 
@@ -152,25 +150,25 @@ shared를 적용한 후 아래와 같은 실행결과를 얻을 수 있다. 원�
 
 ```
 
-Update username r
+Request search r
 observer 1 next(r)
 observer 2 next(r)
-Update username rx
+Request search rx
 observer 1 next(rx)
 observer 2 next(rx)
-Update username rxs
+Request search rxs
 observer 1 next(rxs)
 observer 2 next(rxs)
-Update username rxsw
+Request search rxsw
 observer 1 next(rxsw)
 observer 2 next(rxsw)
-Update username rxswi
+Request search rxswi
 observer 1 next(rxswi)
 observer 2 next(rxswi)
-Update username rxswif
+Request search rxswif
 observer 1 next(rxswif)
 observer 2 next(rxswif)
-Update username rxswift
+Request search rxswift
 observer 1 next(rxswift)
 observer 2 next(rxswift)
 
