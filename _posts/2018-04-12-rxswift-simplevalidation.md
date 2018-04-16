@@ -1,179 +1,241 @@
 ---
 layout: post
-title: "[ RX_SWIFT ] shared에 대해 알아보자."
-description: "shared에 대해 알아보자."
+title: "[ RX_SWIFT ]  RxSwift 예제 Simple Validation Sample 을 분석해보자."
+description: ""
 tags: [swift]
 
 ---
 
 
-
-Observable을 여러 observer에서 사용할 때 당연히 Observable 인스턴스는 하나의 공유된 인스턴스를 쓴다고 생각한다. 하지만 실제 코드를 동작시키다보면 예상과는 다르게 동작하는 경우가 있는데 그런 경우를 대비해 정확한 동작을 알아야 하는 것이 shared 메소드이다. 
-
-
-
-## shared는 무엇인가?
-
-ObservableType의 extension으로 하나의 subscription을 공유하는 Observable을 리턴해 준다. 
+RxSwift의 공식 두번째 예제 Simple Validation 소스를 분석하고 여기 사용된 RxSwift 메소드와 동작 원리에 대해서 생각해보자.
 
 
 
-### Prototype
+## Simple Validation
+
+사용자 이름을 입력 받아서 특정 조건을 만족하면 패스워드 입력을 활성화하고 패스워드 입력값이 특정 조건을 만족했을 때 
+
+사용자 이름과 패스워드가 모두 정상입력되었으면  버튼을 활성화 하는 프로그램을 만들어보자. 
+
+
+
+### 프로그램 실행 화면 
+
+
+
+<img src="https://github.com/wonwoo518/wonwoo518.github.io/blob/master/images/simplevalidation.png?raw=true" width="286" height="550" alt="">
+
+
+
+### Source Code  
+
+***usernameValidOutlet*** 
+
+- UILabel 로 usernameOutlet.text값이 조건을 만족하지 않을 때 만족해야할 조건을 출력한다. 
+
+***passwordValidOutlet*** 
+
+- UILabel 로 passwordOutlet.text값이 조건을 만족하지 않을 때 만족해야할 조건을 출력한다. 
+
+```swif
+usernameValidOutlet.text = "Username has to be at least \(minimalUsernameLength) characters"
+passwordValidOutlet.text = "Password has to be at least \(minimalPasswordLength) characters"
+```
+
+
+
+
+
+***usernameOutlet*** 
+
+-  사용자 이름 입력을 받는 UITextField
+
+***passwordOutlet*** 
+
+- 비밀번호 입력을 받는 UITextField
+
+***usernameValid*** 
+
+- usernameOutlet.text값이 valid한지를 Bool값으로 방출하는 Observable이다. 
+- usernameOutlet.rx.text는 subject로 사용자 입력을 observe하고 이벤트를 방출한다. 
+
+***passwordValid*** 
+
+- passwordOutlet.text값이 valid한지를 Bool값으로 방출하는 Observable이다. 
+
+***everythingValid*** 
+
+- 가장 최근에 usernameValid, passwordValid에서 방출된 이벤트 모두 true인지를 Bool값으로 방출하는 Observable이다. 
 
 ```swift
-extension ObservableType {
+        
+let usernameValid:Observable<Bool> = usernameOutlet.rx.text.orEmpty 
+	.map { $0.count >= minimalUsernameLength }                      
+	.share(replay: 1)                                               
 
-    /**
-         Returns an observable sequence that **shares a single subscription to the underlying sequence**, and immediately upon subscription replays  elements in buffer.
-         
-         This operator is equivalent to:
-         * `.whileConnected`
+let passwordValid:Observable<Bool> = passwordOutlet.rx.text.orEmpty
+	.map { $0.count >= minimalPasswordLength }
+	.share(replay: 1)
+
+let everythingValid:Observable<Bool> = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
+            .share(replay: 1)
 ```
-         // Each connection will have it's own subject instance to store replay events.
-         // Connections will be isolated from each another.
-         source.multicast(makeSubject: { Replay.create(bufferSize: replay) }).refCount()
-         ```
-         * `.forever`
-         ```
-         // One subject will store replay events for all connections to source.
-         // Connections won't be isolated from each another.
-         source.multicast(Replay.create(bufferSize: replay)).refCount()
-         ```
-         
-         It uses optimized versions of the operators for most common operations.
+
+
+
+***Observable에 Observer 적용하기*** 
+
+- usernameValid, passwordValid, everythingValid 각 Observable 의 이벤트를 수신할 observer를 지정한다. 
+- Observer 지정시 bind 메소드를 이용한다.
+- rx.isEnabled, rx.isHidden는 Binder타입이며 Binder는 ObserverType을 상속받는다.  
+
+```swift
+usernameValid
+    .bind(to: passwordOutlet.rx.isEnabled)
+    .disposed(by: disposeBag)
+
+usernameValid
+    .bind(to: usernameValidOutlet.rx.isHidden)
+    .disposed(by: disposeBag)
+
+passwordValid
+    .bind(to: passwordValidOutlet.rx.isHidden)
+    .disposed(by: disposeBag)
+
+everythingValid
+    .bind(to: doSomethingOutlet.rx.isEnabled)
+    .disposed(by: disposeBag)
+
+```
+
+
+
+
+
+***bind***
+
+- observer 적용시 사용하며 파라미터는 observerType이다. 
+
+```swift
+public func bind<O>(to observer: O) -> Disposable where O : ObserverType, Self.E == O.E
+```
+
+
+
+***rx.isEnabled***
+
+- RxCocoa의 UIControl extension으로 지원되는 isEnabled는 이벤트 발생 시 이벤트값을 control.isEnabled에 다시 할당하는 observerType을 상속받는 Binder이다. 
+
+```swift
+extension Reactive where Base: UIControl {
     
-         - parameter replay: Maximum element count of the replay buffer.
-         - parameter scope: Lifetime scope of sharing subject. For more information see `SubjectLifetimeScope` enum.
-    
-         - seealso: [shareReplay operator on reactivex.io](http://reactivex.io/documentation/operators/replay.html)
-    
-         - returns: An observable sequence that contains the elements of a sequence produced by multicasting the source sequence.
-         */
-    public func share(replay: Int = default, scope: RxSwift.SubjectLifetimeScope = default) -> RxSwift.Observable<Self.E>
+    /// Bindable sink for `enabled` property.
+    public var isEnabled: Binder<Bool> {
+        return Binder(self.base) { control, value in
+            control.isEnabled = value
+        }
+    }
+    ...
 }
-```
-
-
-
-정의만 봐서는 무슨 말인지 모르겠다. 예제를 만들어서 테스트해보자. 
-
-예제는  UIViewController에 1개의 TextField가 있고 여기에 값을 변경할 때마다 Network로 request를 하는 것이다.
-
-​```swift
-        let ob:Observable<String> = usernameTextField.rx.text.orEmpty
-            .map { text in 
-                //request username update
-                // 
-                print("Update username \(text)")
-                return text
-            }
-                
-        _ = ob.subscribe{
-            print("observer 1 \($0)") 
-        }
-        
-        _ = ob.subscribe{
-            print("observer 2 \($0)")
-        }
 
 ```
 
-ob.subscribe를 통해 network에 요청이 발생 후 observer를 추가했다. 
-
-위 코드에 따라 usernameTextField의 값이 바뀔때마다 network 요청이 발생할 것이고 "oberver 1", "observer 2"가 출력될 것을 예상할 것이다. 프로그램을 실행 후 usernameTextField에 "rxswift"를 입력하고 출력을 확인해보자. 
-
-```
-Update username r
-observer 1 next(r)
-Update username r
-observer 2 next(r)
-Update username rx
-observer 1 next(rx)
-Update username rx
-observer 2 next(rx)
-Update username rxs
-observer 1 next(rxs)
-Update username rxs
-observer 2 next(rxs)
-Update username rxsw
-observer 1 next(rxsw)
-Update username rxsw
-observer 2 next(rxsw)
-Update username rxswi
-observer 1 next(rxswi)
-Update username rxswi
-observer 2 next(rxswi)
-Update username rxswif
-observer 1 next(rxswif)
-Update username rxswif
-observer 2 next(rxswif)
-Update username rxswift
-observer 1 next(rxswift)
-Update username rxswift
-observer 2 next(rxswift)
-```
-
-위의 결과대로라면 TextField의 값을 바꿀때마다 2번의 network request가 호출된다. 이것은 의도한 결과가 아니다. 
-
-그렇다면 shared 메소드를 사용해보자. 
 
 
 
-shared Observable인 경우 
+
+***rx.isHidden***
+
+- RxCocoa의 UIView extension으로 지원되는 isHidden은 이벤트 발생 시 이벤트값을 view.isEnabled에 다시 할당하는 observerType을 상속받는 Binder이다. 
 
 ```swift
-        let ob:Observable<String> = usernameTextField.rx.text.orEmpty
-            .map { text in 
-                //request username update
-                // ...
-                print("Update username \(text)")
-                return text
-            }.shared() 
-                
-        _ = ob.subscribe{
-            print("observer 1 \($0)")
+extension Reactive where Base: UIView {
+    /// Bindable sink for `hidden` property.
+    public var isHidden: Binder<Bool> {
+        return Binder(self.base) { view, hidden in
+            view.isHidden = hidden
         }
+    }
+    ...
+}
+
+```
+
+
+
+
+
+## Full Source###
+
+```swift
+import UIKit
+import RxSwift
+import RxCocoa
+
+fileprivate let minimalUsernameLength = 5
+fileprivate let minimalPasswordLength = 5
+
+class SimpleValidationViewController : ViewController {
+
+    @IBOutlet weak var usernameOutlet: UITextField!
+    @IBOutlet weak var usernameValidOutlet: UILabel!
+
+    @IBOutlet weak var passwordOutlet: UITextField!
+    @IBOutlet weak var passwordValidOutlet: UILabel!
+
+    @IBOutlet weak var doSomethingOutlet: UIButton!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        usernameValidOutlet.text = "Username has to be at least \(minimalUsernameLength) characters"
+        passwordValidOutlet.text = "Password has to be at least \(minimalPasswordLength) characters"
         
-        _ = ob.subscribe{
-            print("observer 2 \($0)")
-        }
+        
 
+        let usernameValid:Observable<Bool> = usernameOutlet.rx.text.orEmpty 
+            .map { $0.count >= minimalUsernameLength }                      
+            .share(replay: 1)                                               
+
+        let passwordValid:Observable<Bool> = passwordOutlet.rx.text.orEmpty
+            .map { $0.count >= minimalPasswordLength }
+            .share(replay: 1)
+
+        let everythingValid:Observable<Bool> = Observable.combineLatest(usernameValid, passwordValid) { $0 && $1 }
+            .share(replay: 1)
+
+        usernameValid
+            .bind(to: passwordOutlet.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        usernameValid
+            .bind(to: usernameValidOutlet.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        passwordValid
+            .bind(to: passwordValidOutlet.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        everythingValid
+            .bind(to: doSomethingOutlet.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        doSomethingOutlet.rx.tap
+            .subscribe(onNext: { [weak self] _ in self?.showAlert() })
+            .disposed(by: disposeBag)
+    }
+
+    func showAlert() {
+        let alertView = UIAlertView(
+            title: "RxExample",
+            message: "This is wonderful",
+            delegate: nil,
+            cancelButtonTitle: "OK"
+        )
+
+        alertView.show()
+    }
+}
 
 ```
-
-
-
-shared를 적용한 후 아래와 같은 실행결과를 얻을 수 있다. 원래 의도했던 동작이다. 
-
-```
-Update username r
-observer 1 next(r)
-observer 2 next(r)
-Update username rx
-observer 1 next(rx)
-observer 2 next(rx)
-Update username rxs
-observer 1 next(rxs)
-observer 2 next(rxs)
-Update username rxsw
-observer 1 next(rxsw)
-observer 2 next(rxsw)
-Update username rxswi
-observer 1 next(rxswi)
-observer 2 next(rxswi)
-Update username rxswif
-observer 1 next(rxswif)
-observer 2 next(rxswif)
-Update username rxswift
-observer 1 next(rxswift)
-observer 2 next(rxswift)
-```
-
-
-
-참고로 shared와 동일한 동작을 하지만 connectable한 Observable을 반환하는 메소드는 publish이다. 
-
-[참고사이트](https://medium.com/@_achou/rxswift-share-vs-replay-vs-sharereplay-bea99ac42168)
-
-
 

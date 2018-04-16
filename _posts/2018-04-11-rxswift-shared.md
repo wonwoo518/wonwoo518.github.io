@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[ RX_SWIFT ] shared에 대해 알아보자."
-description: "shared에 대해 알아보자."
+description: ""
 tags: [swift]
 
 ---
